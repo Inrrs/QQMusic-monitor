@@ -46,6 +46,10 @@ async def lifespan(app: FastAPI):
     await asyncio.gather(*worker_tasks, return_exceptions=True)
     print("所有下载工作者已停止。")
     
+    # 在关闭前最后保存一次任务状态
+    print("正在保存最终任务状态...")
+    await tasks._save_download_tasks()
+    
     await qq_music.close_qqmusic_session()
 
 app = FastAPI(title="QQ音乐下载器", lifespan=lifespan)
