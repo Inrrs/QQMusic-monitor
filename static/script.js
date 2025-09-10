@@ -353,12 +353,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             completedTasks.reverse();
 
-            // Update ongoing list
-            if (ongoingTasks.length === 0) {
-                ongoingDownloadsList.innerHTML = '<li class="list-group-item">暂无进行中的任务</li>';
-            } else {
-                ongoingDownloadsList.innerHTML = ongoingTasks.map(task => createTaskItemHtml(task, false)).join('');
-            }
+            // Update counts
+            document.getElementById('ongoing-count').textContent = ongoingTasks.length;
+            document.getElementById('completed-count').textContent = completedTasks.length;
 
             // Update ongoing list UI
             if (ongoingTasks.length === 0) {

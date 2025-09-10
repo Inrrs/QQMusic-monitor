@@ -44,8 +44,8 @@
             <div class="col-md-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
-                        <h4 class="mb-0 me-2">进行中</h4>
-                        <div id="retry-all-container"></div>
+                        <h4 class="mb-0 me-2">进行中 <span id="ongoing-count" class="badge bg-secondary">0</span></h4>
+                        <div id="retry-all-container" class="ms-2"></div>
                     </div>
                     <div id="ongoing-actions" class="btn-group" style="display: none;">
                         <button type="button" class="btn btn-outline-warning btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mt-4">
-                    <h4 class="mb-0">已完成</h4>
+                    <h4 class="mb-0">已完成 <span id="completed-count" class="badge bg-secondary">0</span></h4>
                     <div id="completed-actions" class="btn-group" style="display: none;">
                         <button type="button" class="btn btn-outline-danger btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-trash"></i> 批量操作
@@ -94,6 +94,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/script.js?v=1.3"></script>
+    <script src="/static/script.js?v=1.4"></script>
 </body>
 </html>
