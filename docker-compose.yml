@@ -1,0 +1,23 @@
+services:
+  app:
+    image: cinrrs/qqmusic-monitor:latest
+    container_name: QQMusic-monitor
+    ports:
+      - "6679:6679"
+    network_mode: bridge
+    volumes:
+      - ./downloads:/app/downloads
+    restart: always
+    environment:
+      # Telegram Bot Token
+      - TELEGRAM_TOKEN=
+      # 授权用户的 Telegram ID，多个用户请用英文逗号分隔
+      # 例如：AUTHORIZED_USERS=12345678,87654321
+      - AUTHORIZED_USERS=
+      # 代理地址，如果不需要请留空
+      # 例如：PROXY_URL=http://127.0.0.1:7890
+      - PROXY_URL=
+
+      # --- 性能配置 ---
+      # 最大并发下载数 (推荐 3-10)
+      - MAX_CONCURRENT_DOWNLOADS=10

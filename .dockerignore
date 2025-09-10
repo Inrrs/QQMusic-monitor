@@ -1,0 +1,18 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# Environment variables
+.env
+
+# Runtime data and credentials
+downloads/
+qq_cookie.json
+download_tasks.json
+monitored_playlists.json

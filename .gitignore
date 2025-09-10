@@ -1,0 +1,24 @@
+# 配置文件
+.env
+qq_cookie.json
+monitored_playlists.json
+download_tasks.json
+
+# 下载目录
+downloads/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 虚拟环境
+venv/
+.venv/
+env/
+.env/
+
+# IDE/编辑器配置
+.vscode/
+.idea/

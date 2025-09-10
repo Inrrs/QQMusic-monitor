@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QQ音乐下载器</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <header class="d-flex justify-content-between align-items-center mb-4">
+            <h1>QQ音乐下载器</h1>
+            <div>
+                <span id="login-status" class="me-3">正在检查登录状态...</span>
+                <button id="login-btn" class="btn btn-primary">扫码登录</button>
+                <button id="logout-btn" class="btn btn-danger" style="display: none;">退出登录</button>
+            </div>
+        </header>
+
+        <div id="qrcode-container" class="text-center mb-4" style="display: none;">
+            <img id="qrcode-img" src="" alt="登录二维码" class="img-fluid" style="max-width: 200px;">
+        </div>
+
+        <div class="row main-layout">
+            <!-- 左侧：歌单列表 -->
+            <div class="col-md-3">
+                <h4>我的歌单</h4>
+                <div id="playlists" class="content-box">
+                    <p>请先登录以查看您的歌单。</p>
+                </div>
+            </div>
+
+            <!-- 中间：歌曲列表 -->
+            <div class="col-md-5">
+                <h4>歌曲列表</h4>
+                <div id="song-list" class="content-box">
+                    <p>请从左侧选择一个歌单。</p>
+                </div>
+            </div>
+
+            <!-- 右侧：下载任务 -->
+            <div class="col-md-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <h4 class="mb-0 me-2">进行中</h4>
+                        <div id="retry-all-container"></div>
+                    </div>
+                    <div id="ongoing-actions" class="btn-group" style="display: none;">
+                        <button type="button" class="btn btn-outline-warning btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-lightning-charge"></i> 批量操作
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item bulk-action-btn-ongoing" href="#" data-action="cancel">取消所选</a></li>
+                            <li><a class="dropdown-item bulk-action-btn-ongoing" href="#" data-action="remove">移除所选</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="list-group content-box mt-2">
+                    <div class="list-group-item list-group-item-action d-flex align-items-center" id="select-all-ongoing-container" style="display: none;">
+                        <input class="form-check-input me-2" type="checkbox" id="select-all-ongoing-checkbox">
+                        <label class="form-check-label" for="select-all-ongoing-checkbox">全选</label>
+                    </div>
+                    <ul id="ongoing-downloads" class="list-group list-group-flush">
+                        <li class="list-group-item">暂无进行中的任务</li>
+                    </ul>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <h4 class="mb-0">已完成</h4>
+                    <div id="completed-actions" class="btn-group" style="display: none;">
+                        <button type="button" class="btn btn-outline-danger btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-trash"></i> 批量操作
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item bulk-action-btn" href="#" data-delete-files="false">移除所选 (仅列表)</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item bulk-action-btn text-danger" href="#" data-delete-files="true">移除所选 (并删除文件)</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="list-group content-box mt-2">
+                    <div class="list-group-item list-group-item-action d-flex align-items-center" id="select-all-completed-container" style="display: none;">
+                        <input class="form-check-input me-2" type="checkbox" id="select-all-completed-checkbox">
+                        <label class="form-check-label" for="select-all-completed-checkbox">全选</label>
+                    </div>
+                    <ul id="completed-downloads" class="list-group list-group-flush">
+                        <li class="list-group-item">暂无已完成的任务</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/script.js?v=1.2"></script>
+</body>
+</html>
