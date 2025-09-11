@@ -54,12 +54,17 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="QQ音乐下载器", lifespan=lifespan)
 
-# 确保 downloads 目录在启动时存在
-os.makedirs("downloads", exist_ok=True)
+# 定义数据目录
+DATA_DIR = "data"
+DOWNLOADS_DIR = os.path.join(DATA_DIR, "downloads")
+
+# 确保数据和下载目录在启动时存在
+os.makedirs(DOWNLOADS_DIR, exist_ok=True)
+
 # 挂载静态文件目录
 app.mount("/static", StaticFiles(directory="static"), name="static")
-# 挂载下载文件目录
-app.mount("/downloads", StaticFiles(directory="downloads"), name="downloads")
+# 挂载下载文件目录，使其可以通过 /downloads 访问
+app.mount("/downloads", StaticFiles(directory=DOWNLOADS_DIR), name="downloads")
 templates = Jinja2Templates(directory="templates")
 
 async def check_auth_status():
@@ -98,8 +103,7 @@ async def logout():
 
 # Helper function to get a set of existing filenames without extension
 def get_existing_song_basenames():
-    download_dir = "downloads"
-    if not os.path.exists(download_dir):
+    if not os.path.exists(DOWNLOADS_DIR):
         return set()
     # Strip extensions and store
     return {os.path.splitext(f)[0] for f in os.listdir(download_dir)}

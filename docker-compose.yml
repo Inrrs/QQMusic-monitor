@@ -6,7 +6,8 @@ services:
       - "6679:6679"
     network_mode: bridge
     volumes:
-      - ./downloads:/app/downloads
+      - ./data:/app/data
+      - ./downloads:/app/data/downloads
     restart: always
     environment:
       # Telegram Bot Token

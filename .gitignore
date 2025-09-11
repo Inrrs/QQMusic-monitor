@@ -1,11 +1,8 @@
 # 配置文件
 .env
-qq_cookie.json
-monitored_playlists.json
-download_tasks.json
 
-# 下载目录
-downloads/
+# 数据目录
+data/
 
 # Python 缓存
 __pycache__/

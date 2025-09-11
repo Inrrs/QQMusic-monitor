@@ -8,9 +8,13 @@ import orjson as json
 import qq_music
 from tasks import add_song_to_queue
 
-MONITOR_FILE = "monitored_playlists.json"
+DATA_DIR = "data"
+MONITOR_FILE = os.path.join(DATA_DIR, "monitored_playlists.json")
 file_lock = asyncio.Lock()
 CHECK_INTERVAL_SECONDS = 1800  # 检查间隔（秒），默认为 1 小时
+
+# 确保数据目录在启动时存在
+os.makedirs(DATA_DIR, exist_ok=True)
 
 # { "playlist_id": {"title": "歌单名", "known_song_mids": ["mid1", "mid2"]} }
 MonitoredPlaylists = Dict[str, Dict[str, Set[str]]]

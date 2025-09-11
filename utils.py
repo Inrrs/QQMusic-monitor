@@ -4,9 +4,12 @@ import httpx
 from qqmusic_api import login
 from qqmusic_api.utils.credential import Credential
 
-# --- Get the directory of the current script to build an absolute path ---
-script_dir = os.path.dirname(os.path.abspath(__file__))
-CREDENTIALS_FILE_PATH = os.path.join(script_dir, "qq_cookie.json")
+# --- Define the data directory and the path for the credentials file ---
+DATA_DIR = "data"
+CREDENTIALS_FILE_PATH = os.path.join(DATA_DIR, "qq_cookie.json")
+
+# Ensure the data directory exists
+os.makedirs(DATA_DIR, exist_ok=True)
 
 def save_credentials(credential):
     """Saves the full state of the user credential to a local JSON file."""

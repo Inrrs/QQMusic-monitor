@@ -9,8 +9,12 @@ import qq_music
 from shared_state import download_tasks
 
 # --- 配置 ---
-TASKS_FILE = "download_tasks.json"
+DATA_DIR = "data"
+TASKS_FILE = os.path.join(DATA_DIR, "download_tasks.json")
 MAX_CONCURRENT_DOWNLOADS = int(os.getenv("MAX_CONCURRENT_DOWNLOADS", 5))
+
+# 确保数据目录在启动时存在
+os.makedirs(DATA_DIR, exist_ok=True)
 
 # --- 生产者-消费者 队列 ---
 # 这是所有待处理下载任务的中央缓冲池
@@ -77,7 +81,7 @@ async def _save_download_tasks():
 async def _execute_download(song_mid: str, song_name: str):
     """实际执行下载的核心逻辑"""
     print(f"开始下载: {song_name}")
-    download_dir = "downloads"
+    download_dir = os.path.join(DATA_DIR, "downloads")
     os.makedirs(download_dir, exist_ok=True)
     url_info = await qq_music.get_song_download_url(song_mid)
 

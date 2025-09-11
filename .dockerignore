@@ -1,18 +1,19 @@
-# Git
+# Git files
 .git
 .gitignore
 
-# Python
-__pycache__/
+# Python cache
+__pycache__
 *.pyc
-*.pyo
-.venv/
 
-# Environment variables
-.env
+# Virtual environment
+.venv
+venv
 
-# Runtime data and credentials
+# IDE/Editor specific files
+.vscode
+.idea
+
+# Data and downloads directories
+data/
 downloads/
-qq_cookie.json
-download_tasks.json
-monitored_playlists.json

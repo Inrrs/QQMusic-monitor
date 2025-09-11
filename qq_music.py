@@ -12,7 +12,7 @@ from qqmusic_api.song import SongFileType
 from qqmusic_api.utils.credential import Credential
 from qqmusic_api.utils.qimei import get_qimei
 from qqmusic_api.utils.session import Session, set_session
-from utils import load_credentials, save_credentials, check_login_status as check_credential_status
+from utils import load_credentials, save_credentials, check_login_status as check_credential_status, CREDENTIALS_FILE_PATH
 
 # --- 全局状态和会话 ---
 login_qr: Optional[QR] = None
@@ -120,13 +120,13 @@ async def initialize_from_cookie():
                         # is shared with the existing session.
                     except Exception as e:
                         print(f"从 cookie 初始化时获取 euin 失败: {e}")
-                        if os.path.exists("qq_cookie.json"):
-                            os.remove("qq_cookie.json")
+                        if os.path.exists(CREDENTIALS_FILE_PATH):
+                            os.remove(CREDENTIALS_FILE_PATH)
                         initialize_qqmusic_session()
             else:
                 print(message)
-                if os.path.exists("qq_cookie.json"):
-                    os.remove("qq_cookie.json")
+                if os.path.exists(CREDENTIALS_FILE_PATH):
+                    os.remove(CREDENTIALS_FILE_PATH)
                 initialize_qqmusic_session()
         else:
             print("未找到本地凭证文件。")
@@ -168,8 +168,8 @@ async def check_login_status():
         except Exception as e:
             print(f"关键步骤获取 euin 失败: {e}。登录被视为无效。")
             is_success = False
-            if os.path.exists("qq_cookie.json"):
-                os.remove("qq_cookie.json")
+            if os.path.exists(CREDENTIALS_FILE_PATH):
+                os.remove(CREDENTIALS_FILE_PATH)
             initialize_qqmusic_session() # 清除无效凭证
 
     message_map = {
