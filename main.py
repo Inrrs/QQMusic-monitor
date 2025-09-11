@@ -35,6 +35,8 @@ async def lifespan(app: FastAPI):
     await qq_music.initialize_from_cookie()
     # 启动后台监控任务
     monitor.start_monitoring_task()
+    # 启动定时重试任务
+    tasks.start_retry_task()
     
     yield
     

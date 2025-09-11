@@ -12,6 +12,7 @@ from shared_state import download_tasks
 DATA_DIR = "data"
 TASKS_FILE = os.path.join(DATA_DIR, "download_tasks.json")
 MAX_CONCURRENT_DOWNLOADS = int(os.getenv("MAX_CONCURRENT_DOWNLOADS", 5))
+RETRY_INTERVAL_SECONDS = int(os.getenv("RETRY_INTERVAL_SECONDS", 24 * 3600))  # 默认24小时
 
 # 确保数据目录在启动时存在
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -159,6 +160,36 @@ def start_download_workers():
         tasks.append(task)
     print(f"已启动 {MAX_CONCURRENT_DOWNLOADS} 个下载工作者。")
     return tasks
+
+async def retry_failed_tasks_periodically():
+    """后台任务：定期重试所有失败的下载"""
+    while True:
+        await asyncio.sleep(RETRY_INTERVAL_SECONDS)
+        print("开始执行定时重试任务，检查失败的下载...")
+        
+        # 创建一个失败任务的副本以安全迭代
+        failed_tasks = {
+            mid: task
+            for mid, task in download_tasks.items()
+            if task.get("status") == "failed"
+        }
+        
+        if not failed_tasks:
+            print("没有发现失败的任务，跳过本次重试。")
+            continue
+
+        print(f"发现 {len(failed_tasks)} 个失败的任务，正在将它们重新加入队列...")
+        for mid, task in failed_tasks.items():
+            song_name = task.get("song_name", "未知歌曲")
+            # 重新加入队列会自动更新任务状态
+            await add_song_to_queue(mid, song_name)
+        
+        print("所有失败的任务已重新加入下载队列。")
+
+def start_retry_task():
+    """在后台启动定时重试任务"""
+    print(f"启动后台定时重试任务，检查间隔为 {RETRY_INTERVAL_SECONDS / 3600:.1f} 小时。")
+    asyncio.create_task(retry_failed_tasks_periodically())
 
 async def add_song_to_queue(song_mid: str, song_name: str):
     """生产者接口：将歌曲加入下载队列"""
