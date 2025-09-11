@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+jinja2
+python-telegram-bot[ext]
+httpx[http2]
+python-dotenv
+qqmusic-api-python
+qrcode
+Pillow
+cryptography
+aiocache
+orjson
+aiofiles

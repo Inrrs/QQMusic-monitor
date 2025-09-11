@@ -1,0 +1,21 @@
+# 配置文件
+.env
+
+# 数据目录
+data/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 虚拟环境
+venv/
+.venv/
+env/
+.env/
+
+# IDE/编辑器配置
+.vscode/
+.idea/
