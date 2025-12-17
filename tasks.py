@@ -15,8 +15,9 @@ TASKS_FILE = os.path.join(DATA_DIR, "download_tasks.json")
 
 # 从配置管理模块获取配置
 from config import config
-MAX_CONCURRENT_DOWNLOADS = config.get("download.max_concurrent", 5)
-RETRY_INTERVAL_SECONDS = config.get("download.retry_interval_seconds", 24 * 3600)  # 默认24小时
+# 确保配置值是整数类型
+MAX_CONCURRENT_DOWNLOADS = int(config.get("download.max_concurrent", 5))
+RETRY_INTERVAL_SECONDS = int(config.get("download.retry_interval_seconds", 24 * 3600))  # 默认24小时
 
 # 确保数据目录在启动时存在
 os.makedirs(DATA_DIR, exist_ok=True)
