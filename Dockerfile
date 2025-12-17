@@ -7,8 +7,8 @@ WORKDIR /app
 # 复制应用程序代码到镜像中
 COPY . /app/
 
-# 安装依赖
-RUN pip install --no-cache-dir -r requirements.txt
+# 安装依赖 - 使用国内镜像源并增加超时时间
+RUN pip install --no-cache-dir --timeout 120 --index-url https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 
 # 暴露端口
 EXPOSE 6696
