@@ -1,0 +1,11 @@
+services:
+  app:
+    image: cinrrs/qqmusic-monitor:latest
+    container_name: QQMusic-monitor
+    ports:
+      - "6696:6696"
+    network_mode: bridge
+    volumes:
+      - ./data:/app/data
+      - ./downloads:/app/downloads
+    restart: always

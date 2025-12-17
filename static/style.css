@@ -1,0 +1,71 @@
+.content-box {
+    height: 30vh;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: .25rem;
+    background-color: #f8f9fa;
+}
+
+.main-layout .col-md-3,
+.main-layout .col-md-5,
+.main-layout .col-md-4 {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-layout .content-box {
+    flex-grow: 1;
+}
+
+/* 优化已有本地歌曲文件按钮样式 */
+.btn-info.download-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    margin-left: auto;
+    white-space: nowrap;
+    min-width: auto;
+}
+
+/* 优化歌曲列表项布局 */
+.song-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.song-item .d-flex {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.song-item .small {
+    width: 100%;
+    text-align: left;
+    margin-top: 0.25rem;
+}
+
+/* 优化配置页面布局 */
+#config-content {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+/* 去掉配置页面中content-box的高度限制 */
+#config-content .content-box {
+    height: auto;
+    max-height: calc(100vh - 200px);
+}
+
+#config-form {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 优化歌曲列表的高度 */
+#song-list {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
